@@ -25,7 +25,7 @@
 
 // Struct to represent a person
 typedef struct {
-	pthread_mutex_t person_lock;
+	pthread_mutex_t lock;
 	int id;
 	Room *room;
 	int is_in_room;
@@ -34,8 +34,8 @@ typedef struct {
 
 // Struct to represent a room
 typedef struct {
-	pthread_mutex_t room_lock;
-	pthread_cond_t	room;
+	pthread_mutex_t lock;
+	pthread_cond_t	room_notifyer;
 	int id;
 	int person_cnt;
 }Room;
@@ -59,7 +59,12 @@ pthread_cond_t condvar = PTHREAD_COND_INITIALIZER;
 
 // FUNCTIONS /////////////////////////////////////////////////////////////////////
 
-int init_room(Room *room);
+/* room functions */
+int init_room(Room *room, int id);
 int destroy_room(Room *room);
+
+/* person functions */
+int init_person(Person *person, int id);
+int destroy_person(Person *person);
 
 #endif /* SIM_MAIN_H_ */
