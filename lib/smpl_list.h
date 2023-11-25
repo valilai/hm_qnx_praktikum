@@ -1,8 +1,13 @@
 /*
  * smpl_list.h
  *
- *  Created on: Nov 25, 2023
- *      Author: devbox
+ * this is a simple list implementation of list.h from linux kernel
+ *
+ * Created on: Nov 25, 2023
+ * Author: 	Valentin Lairich
+ * Co-Author:	-
+ * Version:	1.0
+ * Updated:	Nov 25, 2023
  */
 
 #ifndef SMPL_LIST_H_
