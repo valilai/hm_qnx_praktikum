@@ -1,12 +1,13 @@
 /*
- * Project_VM.h
+ * sim_main.h
  *
- *  Created on: Nov 25, 2023
- *      Author: devbox
+ * Created on: Nov 25, 2023
+ * Author: Valentin Lairich
+ * Author: Sami
  */
 
-#ifndef PROJECT_VM_H_
-#define PROJECT_VM_H_
+#ifndef SIM_MAIN_H_
+#define SIM_MAIN_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,8 +18,9 @@
 
 #include <thread_functions.h>
 
-pthread_mutex_t room_lock = PTHREAD_MUTEX_INITIALIZER;
-pthread_cond_t	room = PTHREAD_COND_INITIALIZER;
+//pthread_mutex_t room_lock = PTHREAD_MUTEX_INITIALIZER;
+//pthread_cond_t	room = PTHREAD_COND_INITIALIZER;
+
 pthread_mutex_t condvar_lock = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t condvar = PTHREAD_COND_INITIALIZER;
 
@@ -46,4 +48,4 @@ do { int ret = call;\
 	}} while(0);
 
 
-#endif /* PROJECT_VM_H_ */
+#endif /* SIM_MAIN_H_ */
