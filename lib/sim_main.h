@@ -1,6 +1,9 @@
 /*
  * sim_main.h
  *
+ * main header file for the "Embedded- und Echtzeitbetriebssysteme"
+ * Praktikum
+ *
  * Created on: Nov 25, 2023
  * Author: Valentin Lairich
  * Author: Sami
@@ -18,16 +21,13 @@
 
 #include <thread_functions.h>
 
-//pthread_mutex_t room_lock = PTHREAD_MUTEX_INITIALIZER;
-//pthread_cond_t	room = PTHREAD_COND_INITIALIZER;
-
-pthread_mutex_t condvar_lock = PTHREAD_MUTEX_INITIALIZER;
-pthread_cond_t condvar = PTHREAD_COND_INITIALIZER;
+// STRUCTURES ///////////////////////////////////////////////////////////////////
 
 // Struct to represent a person
 typedef struct {
 	pthread_mutex_t person_lock;
 	int id;
+	Room *room;
 	int is_in_room;
 	int (*work_func)(void *);
 }Person;
@@ -40,6 +40,8 @@ typedef struct {
 	int person_cnt;
 }Room;
 
+// DEFINITIONS ///////////////////////////////////////////////////////////////////
+
 #define CHECK_SUCCESS(call) \
 do { int ret = call;\
 	if ( ret != 0 ){\
@@ -47,5 +49,17 @@ do { int ret = call;\
 		exit(1);\
 	}} while(0);
 
+
+// GLOBALS ///////////////////////////////////////////////////////////////////////
+
+//pthread_mutex_t room_lock = PTHREAD_MUTEX_INITIALIZER;
+//pthread_cond_t	room = PTHREAD_COND_INITIALIZER;
+pthread_mutex_t condvar_lock = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t condvar = PTHREAD_COND_INITIALIZER;
+
+// FUNCTIONS /////////////////////////////////////////////////////////////////////
+
+int init_room(Room *room);
+int destroy_room(Room *room);
 
 #endif /* SIM_MAIN_H_ */
