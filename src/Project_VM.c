@@ -12,6 +12,7 @@
 */
 #include <sim_main.h>
 #include <thread_functions.h>
+#include <task3_waste_time.h>
 
 int main(void) {
 	Room kitchen;
@@ -27,13 +28,17 @@ int main(void) {
 	Person persons[4];
 	pthread_t tid[4];
 
-	for(int i = 0; i < 4; i++) {
+	// calibrate time waste function
+	waste_time_calibrate();
+
+	for(int i = 0; i < 1; i++) {
 		//CHECK_SUCCESS(init_person(&persons[i], i, &kitchen, 0));
 		init_person(&persons[i], i, &kitchen, 0);
 
 		// Create a thread for each person
 		//CHECK_SUCCESS(pthread_create(&tid[i], NULL, person_thread, &persons[i]));
-		pthread_create(&tid[i], NULL, person_thread, &persons[i]);
+		//pthread_create(&tid[i], NULL, person_thread, &persons[i]);
+		pthread_create(&tid[i], NULL, person_thread_aw, &persons[i]);
 	}
 
 	// create a monitor thread
@@ -43,7 +48,7 @@ int main(void) {
 	//CHECK_SUCCESS(pthread_join(kitchen_monitor, NULL));
 	pthread_join(kitchen_monitor, NULL);
 
-	for(int i = 0; i < 4; i++) {
+	for(int i = 0; i < 1; i++) {
 		//CHECK_SUCCESS(pthread_join(tid[i], NULL));
 		pthread_join(tid[i], NULL);
 	}

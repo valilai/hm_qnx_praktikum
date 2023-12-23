@@ -6,7 +6,7 @@
  *
  * Created on: Nov 25, 2023
  * Author: 	Valentin Lairich
- * Co-Author:	-
+ * Author:	Sami Hamza
  * Version:	1.0
  * Updated:	Nov 25, 2023
  */

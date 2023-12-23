@@ -15,9 +15,11 @@
 
 #include <sim_main.h>
 //#include <thread_functions.c>
+#include <task3_waste_time.h>
 
 void *person_thread(void* arg);
 void *room_monitor_thread(void* arg);
+void *person_thread_aw(void* arg);
 
 
 #endif /* THREAD_FUNCTIONS_H_ */

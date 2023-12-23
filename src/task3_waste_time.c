@@ -25,6 +25,7 @@ void waste_time(unsigned int msecs) {
 	// create the timespec struct and write time
 	struct timespec when;
 	nsec2timespec(&when,msecs*1000000);
+	//printf("Time: %d \n", timespec2nsec(&when));
 	// waste time by calling nanospin (performs calibrated do... while...)
 	CHECK_SUCCESS(nanospin(&when));
 	return;

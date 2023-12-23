@@ -20,6 +20,7 @@ void *person_thread(void* arg){
 		int sleepTime = rand() % 30 + 1;
 		sleep(sleepTime);
 
+
 		pthread_mutex_lock(&person->lock);
 
 		// Person betritt oder verlässt den Raum
@@ -42,6 +43,43 @@ void *person_thread(void* arg){
 
 	return NULL;
 }
+
+
+void *person_thread_aw(void* arg){
+	Person *person = (Person *)arg;
+
+		while(1) {
+			// Zufällige Zeit für An- bzw. Abwesenheit generieren (1-30 Sekunden)
+			//int sleepTime = rand() % 30 + 1;
+			//sleep(sleepTime);
+
+			// work for 1/2 second
+			waste_time(500);
+
+
+			pthread_mutex_lock(&person->lock);
+
+			// Person betritt oder verlässt den Raum
+			person->is_in_room = !person->is_in_room;
+
+			pthread_mutex_unlock(&person->lock);
+
+			pthread_mutex_lock(&person->room->lock);
+
+			// Raum counter hoch oder runterzählen
+			if(person->is_in_room == 0)
+				person->room->person_cnt--;
+			else
+				person->room->person_cnt++;
+
+			pthread_cond_signal(&person->room->room_notifier);
+			pthread_mutex_unlock(&person->room->lock);
+
+		}
+
+		return NULL;
+}
+
 void *room_monitor_thread(void* arg){
 	Room *room = (Room *)arg;
 
